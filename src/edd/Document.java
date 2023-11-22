@@ -11,12 +11,13 @@ package edd;
 public class Document {
     
     private String name;
-    private String document_type;
+    private String documentType;
     private int size;
+    private long timeSendToPriorityQueue;
 
     public Document(String name, String document_type, int size) {
         this.name = name;
-        this.document_type = document_type;
+        this.documentType = document_type;
         this.size = size;
     }
 
@@ -25,12 +26,21 @@ public class Document {
     }
 
     public String getDocument_type() {
-        return document_type;
+        return documentType;
     }
 
     public int getSize() {
         return size;
     }
+
+    public long getTimeSendToPriorityQueue() {
+        return timeSendToPriorityQueue;
+    }
+
+    public void setTimeSendToPriorityQueue(long timeSendToPriorityQueue) {
+        this.timeSendToPriorityQueue = timeSendToPriorityQueue;
+    }
+    
     
     
     

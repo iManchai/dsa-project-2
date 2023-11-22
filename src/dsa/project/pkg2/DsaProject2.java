@@ -4,6 +4,7 @@
  */
 package dsa.project.pkg2;
 import interfaz.Interfaz;
+import edd.*;
 
 /**
  *

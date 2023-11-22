@@ -16,6 +16,8 @@ public class DsaProject2 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        HashTable table = new HashTable(10);
+        table.loadTable("users.csv");    
     }
     
 }

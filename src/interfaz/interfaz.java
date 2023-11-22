@@ -4,17 +4,28 @@
  */
 package interfaz;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.io.*;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author manch
  */
-public class interfaz extends javax.swing.JFrame {
+public class Interfaz extends javax.swing.JFrame implements Runnable{
 
+    int hour,minute,second;
     /**
      * Creates new form interfaz
      */
-    public interfaz() {
-        initComponents();
+    public Interfaz() {
+        initComponents(); 
+        //creando 
+        Thread t = new Thread(this);
+        t.start();
     }
 
     /**
@@ -26,57 +37,438 @@ public class interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Titulo = new javax.swing.JLabel();
+        horas24 = new javax.swing.JLabel();
+        Proyect = new javax.swing.JLabel();
+        College = new javax.swing.JLabel();
+        Names = new javax.swing.JLabel();
+        CargarArchivo = new javax.swing.JButton();
+        Tabs = new javax.swing.JTabbedPane();
+        TabAñadirDoc = new javax.swing.JPanel();
+        UserLis2 = new javax.swing.JComboBox<>();
+        Users = new javax.swing.JLabel();
+        NombreUser = new javax.swing.JLabel();
+        Ejemplo = new javax.swing.JLabel();
+        TipoDoc = new javax.swing.JLabel();
+        AñadirNombreDoc = new javax.swing.JTextField();
+        TiposdeDoc = new javax.swing.JComboBox<>();
+        AñadirDoc = new javax.swing.JButton();
+        TamañoDoc = new javax.swing.JLabel();
+        Tamaño = new javax.swing.JTextField();
+        TabAñadirUser = new javax.swing.JPanel();
+        Prioridades = new javax.swing.JComboBox<>();
+        Prioridad = new javax.swing.JLabel();
+        AñadirNombreUser = new javax.swing.JTextField();
+        NombreUser1 = new javax.swing.JLabel();
+        Ejemplo1 = new javax.swing.JLabel();
+        AñadirUser = new javax.swing.JButton();
+        TabEliminar = new javax.swing.JPanel();
+        DocList = new javax.swing.JComboBox<>();
+        BorrarUser = new javax.swing.JButton();
+        UserList = new javax.swing.JComboBox<>();
+        BorrarDoc = new javax.swing.JButton();
+        UserList1 = new javax.swing.JComboBox<>();
+        TabVer = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo.setText("Reloj");
+
+        horas24.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        horas24.setForeground(new java.awt.Color(255, 51, 51));
+        horas24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        Proyect.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Proyect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Proyect.setText("PROYECTO 2 - ESTRUCTURA DE DATOS");
+
+        College.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        College.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        College.setText("UNIVERSIDAD METROPOLITANA");
+
+        Names.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Names.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Names.setText("Elias Fung - Darío Fernández - Emiliana Plaz");
+
+        CargarArchivo.setText("Cargar Archivo");
+        CargarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarArchivoActionPerformed(evt);
+            }
+        });
+
+        UserLis2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        UserLis2.setToolTipText("");
+        UserLis2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                UserLis2FocusGained(evt);
+            }
+        });
+
+        Users.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Users.setText("Users");
+
+        NombreUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NombreUser.setText("Nombre del Documento");
+
+        Ejemplo.setText("Ejemplo: Tabla de Tipos Pokemón");
+
+        TipoDoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TipoDoc.setText("Tipo de Documento");
+
+        TiposdeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Word", "Excel", "PowerPoint", "PDF", "Imagen ", " " }));
+        TiposdeDoc.setToolTipText("");
+
+        AñadirDoc.setText("Añadir");
+
+        TamañoDoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TamañoDoc.setText("Tamaño del Documento");
+
+        javax.swing.GroupLayout TabAñadirDocLayout = new javax.swing.GroupLayout(TabAñadirDoc);
+        TabAñadirDoc.setLayout(TabAñadirDocLayout);
+        TabAñadirDocLayout.setHorizontalGroup(
+            TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabAñadirDocLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TipoDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NombreUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TamañoDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UserLis2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(TabAñadirDocLayout.createSequentialGroup()
+                        .addComponent(AñadirNombreDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Ejemplo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TiposdeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(AñadirDoc)
+                        .addComponent(Tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(128, Short.MAX_VALUE))
+        );
+        TabAñadirDocLayout.setVerticalGroup(
+            TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabAñadirDocLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserLis2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ejemplo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AñadirNombreDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TiposdeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TamañoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(AñadirDoc)
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+
+        Tabs.addTab("Añadir Documento", TabAñadirDoc);
+
+        Prioridades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "prioridad_alta", "prioridad_media", "prioridad_baja" }));
+        Prioridades.setToolTipText("");
+
+        Prioridad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Prioridad.setText("Prioridad");
+
+        NombreUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NombreUser1.setText("Nombre del Usuario");
+
+        Ejemplo1.setText("Ejemplo: @Xx_Destroyer_xX");
+
+        AñadirUser.setText("Añadir");
+
+        javax.swing.GroupLayout TabAñadirUserLayout = new javax.swing.GroupLayout(TabAñadirUser);
+        TabAñadirUser.setLayout(TabAñadirUserLayout);
+        TabAñadirUserLayout.setHorizontalGroup(
+            TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabAñadirUserLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Prioridad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NombreUser1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabAñadirUserLayout.createSequentialGroup()
+                        .addComponent(AñadirNombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Ejemplo1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(AñadirUser)
+                        .addComponent(Prioridades, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(153, 153, 153))
+        );
+        TabAñadirUserLayout.setVerticalGroup(
+            TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabAñadirUserLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AñadirNombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NombreUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ejemplo1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Prioridades, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(AñadirUser)
+                .addContainerGap(148, Short.MAX_VALUE))
+        );
+
+        Tabs.addTab("Añadir User", TabAñadirUser);
+
+        DocList.setToolTipText("");
+        DocList.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DocListFocusGained(evt);
+            }
+        });
+
+        BorrarUser.setText("Borrar User");
+        BorrarUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BorrarUserMouseClicked(evt);
+            }
+        });
+
+        UserList.setToolTipText("");
+        UserList.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                UserListFocusGained(evt);
+            }
+        });
+
+        BorrarDoc.setText("Borrar Documento");
+        BorrarDoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BorrarDocMouseClicked(evt);
+            }
+        });
+
+        UserList1.setToolTipText("");
+        UserList1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                UserList1FocusGained(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TabEliminarLayout = new javax.swing.GroupLayout(TabEliminar);
+        TabEliminar.setLayout(TabEliminarLayout);
+        TabEliminarLayout.setHorizontalGroup(
+            TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createSequentialGroup()
+                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabEliminarLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(UserList1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TabEliminarLayout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(BorrarUser)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(BorrarDoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UserList, javax.swing.GroupLayout.Alignment.TRAILING, 0, 144, Short.MAX_VALUE))
+                    .addComponent(DocList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(156, 156, 156))
+        );
+        TabEliminarLayout.setVerticalGroup(
+            TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabEliminarLayout.createSequentialGroup()
+                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabEliminarLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DocList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UserList1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UserList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BorrarUser)
+                        .addGap(18, 18, 18)))
+                .addComponent(BorrarDoc)
+                .addContainerGap(127, Short.MAX_VALUE))
+        );
+
+        Tabs.addTab("Eliminar", TabEliminar);
+
+        javax.swing.GroupLayout TabVerLayout = new javax.swing.GroupLayout(TabVer);
+        TabVer.setLayout(TabVerLayout);
+        TabVerLayout.setHorizontalGroup(
+            TabVerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+        );
+        TabVerLayout.setVerticalGroup(
+            TabVerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 308, Short.MAX_VALUE)
+        );
+
+        Tabs.addTab("Ver Árbol", TabVer);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(CargarArchivo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Names, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Proyect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(College, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(horas24, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Proyect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(College)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Names))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(horas24, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(CargarArchivo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void CargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new interfaz().setVisible(true);
-            }
-        });
+        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("CSV Files", "txt", "csv");
+        fileChooser.setFileFilter(imgFilter);
+
+        int result = fileChooser.showOpenDialog(this);
+        File fileName = fileChooser.getSelectedFile();
+        BufferedReader reader = null;
+        
+        
+        
+    }//GEN-LAST:event_CargarArchivoActionPerformed
+
+    private void UserLis2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserLis2FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserLis2FocusGained
+
+    private void DocListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocListFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DocListFocusGained
+
+    private void BorrarUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarUserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BorrarUserMouseClicked
+
+    private void UserListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserListFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserListFocusGained
+
+    private void UserList1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserList1FocusGained
+
+    private void BorrarDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarDocMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BorrarDocMouseClicked
+
+    public static void main(String[] args) {
+        
+    
+        
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AñadirDoc;
+    private javax.swing.JTextField AñadirNombreDoc;
+    private javax.swing.JTextField AñadirNombreUser;
+    private javax.swing.JButton AñadirUser;
+    private javax.swing.JButton BorrarDoc;
+    private javax.swing.JButton BorrarUser;
+    private javax.swing.JButton CargarArchivo;
+    private javax.swing.JLabel College;
+    private javax.swing.JComboBox<String> DocList;
+    private javax.swing.JLabel Ejemplo;
+    private javax.swing.JLabel Ejemplo1;
+    private javax.swing.JLabel Names;
+    private javax.swing.JLabel NombreUser;
+    private javax.swing.JLabel NombreUser1;
+    private javax.swing.JLabel Prioridad;
+    private javax.swing.JComboBox<String> Prioridades;
+    private javax.swing.JLabel Proyect;
+    private javax.swing.JPanel TabAñadirDoc;
+    private javax.swing.JPanel TabAñadirUser;
+    private javax.swing.JPanel TabEliminar;
+    private javax.swing.JPanel TabVer;
+    private javax.swing.JTabbedPane Tabs;
+    private javax.swing.JTextField Tamaño;
+    private javax.swing.JLabel TamañoDoc;
+    private javax.swing.JLabel TipoDoc;
+    private javax.swing.JComboBox<String> TiposdeDoc;
+    private javax.swing.JLabel Titulo;
+    private javax.swing.JComboBox<String> UserLis2;
+    private javax.swing.JComboBox<String> UserList;
+    private javax.swing.JComboBox<String> UserList1;
+    private javax.swing.JLabel Users;
+    private javax.swing.JLabel horas24;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while(true) {
+            Calendar cal = Calendar.getInstance();
+            hour = cal.get(Calendar.HOUR_OF_DAY);
+            minute = cal.get(Calendar.MINUTE);
+            second = cal.get(Calendar.SECOND);
+            
+            //24 horas
+            SimpleDateFormat sdf24 = new SimpleDateFormat("HH:mm:ss");
+            Date dat = cal.getTime();
+            String time24 = sdf24.format(dat);
+            horas24.setText(time24);
+        }
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

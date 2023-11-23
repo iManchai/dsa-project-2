@@ -35,10 +35,7 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="Names" min="-2" pref="269" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="Names" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="Proyect" max="32767" attributes="0"/>
@@ -263,13 +260,12 @@
             <Component class="javax.swing.JComboBox" name="TiposdeDoc">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="6">
+                  <StringArray count="5">
                     <StringItem index="0" value="Word"/>
                     <StringItem index="1" value="Excel"/>
                     <StringItem index="2" value="PowerPoint"/>
                     <StringItem index="3" value="PDF"/>
-                    <StringItem index="4" value="Imagen "/>
-                    <StringItem index="5" value=" "/>
+                    <StringItem index="4" value="Imagen"/>
                   </StringArray>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value=""/>

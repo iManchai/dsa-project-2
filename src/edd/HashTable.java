@@ -10,83 +10,52 @@ import java.io.IOException;
 
 
 public class HashTable {
-    private Nodo<User>[] HashTable;
-    private int size;
+    private Entry[] users;
+    private int capacity = 16;
 
-    public HashTable(int size) {
-        this.size = size;
-        HashTable = new Nodo[size];
+    public HashTable() {
+        users = new Entry[capacity];
     }
 
-    private int hash(String user) {
-        int hash = 0;
-        for (int i = 0; i < user.length(); i++) {
-            hash = (hash * 31 + user.charAt(i)) % size;
-        }
-        return hash;
-    }
-
-    public void addUser(User user) {
-        int index = hash(user.getUsername());
-        Nodo<User> newNode = new Nodo<>(user);
-
-        if (HashTable[index] == null) {
-            HashTable[index] = newNode;
+    public void put(String key, Object value) {
+        int index = getIndex(key);
+        Entry entry = users[index];
+        if (entry == null) {
+            entry = new Entry(key, value);
+            users[index] = entry;
         } else {
-            Nodo<User> currentNode = HashTable[index];
-            while (currentNode.getNext() != null) {
-                currentNode = currentNode.getNext();
+            while (entry.next != null) {
+                entry = entry.next;
             }
-            currentNode.setNext(newNode);
+            entry.next = new Entry(key, value);
         }
     }
 
-    public User getUser(String username) {
-        int index = hash(username);
-        Nodo<User> node = HashTable[index];
-        while (node != null) {
-            if (node.getValue().getUsername().equals(username)) {
-                return node.getValue();
+    public Object get(String key) {
+        int index = getIndex(key);
+        Entry entry = users[index];
+        while (entry != null) {
+            if (entry.key.equals(key)) {
+                return entry.value;
             }
-            node = node.getNext();
+            entry = entry.next;
         }
-        return null; // User not found
+        return null;
     }
 
-    public void addDocument(String username, Document document) {
-        User user = getUser(username);
-        if (user != null) {
-            user.getDocuments().add(document);
-        }
+    private int getIndex(String key) {
+        return Math.abs(key.hashCode() % capacity);
     }
 
-    public LinkedList<Document> getDocuments(String username) {
-        User user = getUser(username);
-        if (user != null) {
-            return user.getDocuments();
-        }
-        return null; // User not found
-    }
-    
-    public void loadTable(String file) {
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] datos = line.split(",");
-                if (datos.length == 3) {
-                    String usuario = datos[0].trim();
-                    String tipo = datos[1].trim();
-                    Document documento = new Document(datos[2].trim(), tipo, 0);
-                    User user = getUser(usuario);
-                    if (user == null) {
-                        user = new User(usuario, tipo);
-                        addUser(user);
-                    }
-                    addDocument(usuario, documento);                    System.out.println(documento);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    private class Entry {
+        public String key;
+        public Object value;
+        public Entry next;
+
+        public Entry(String key, Object value) {
+            this.key = key;
+            this.value = value;
+            this.next = null;
         }
     }
 }

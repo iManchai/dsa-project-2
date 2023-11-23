@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author manch
  */
-public class Interfaz extends javax.swing.JFrame implements Runnable{
+public class interfaz extends javax.swing.JFrame implements Runnable{
 
     int hour,minute,second;
     public LinkedList<User> listOfUsers = new LinkedList();
@@ -27,7 +27,7 @@ public class Interfaz extends javax.swing.JFrame implements Runnable{
     /**
      * Creates new form interfaz
      */
-    public Interfaz() {
+    public interfaz() {
         initComponents(); 
         //creando 
         Thread t = new Thread(this);
@@ -405,9 +405,9 @@ public class Interfaz extends javax.swing.JFrame implements Runnable{
             
             reader.close();            
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_CargarArchivoActionPerformed
 

@@ -10,6 +10,9 @@ import java.util.Date;
 import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import edd.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +21,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Interfaz extends javax.swing.JFrame implements Runnable{
 
     int hour,minute,second;
+    public LinkedList<User> listOfUsers = new LinkedList();
+    public MinBinaryHeap heap = new MinBinaryHeap(50);
+    
     /**
      * Creates new form interfaz
      */
@@ -118,7 +124,7 @@ public class Interfaz extends javax.swing.JFrame implements Runnable{
         TipoDoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TipoDoc.setText("Tipo de Documento");
 
-        TiposdeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Word", "Excel", "PowerPoint", "PDF", "Imagen ", " " }));
+        TiposdeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Word", "Excel", "PowerPoint", "PDF", "Imagen" }));
         TiposdeDoc.setToolTipText("");
 
         AñadirDoc.setText("Añadir");
@@ -334,9 +340,7 @@ public class Interfaz extends javax.swing.JFrame implements Runnable{
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Names, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Names, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Proyect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -380,15 +384,31 @@ public class Interfaz extends javax.swing.JFrame implements Runnable{
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
-        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("CSV Files", "txt", "csv");
+        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("CSV Files", "csv");
         fileChooser.setFileFilter(imgFilter);
 
         int result = fileChooser.showOpenDialog(this);
         File fileName = fileChooser.getSelectedFile();
         BufferedReader reader = null;
         
-        
-        
+        try {
+            reader = new BufferedReader(new FileReader(fileName.getAbsolutePath()));
+            String lineText = reader.readLine();
+            while (lineText != null) {
+                String[] parts = lineText.split(",");
+                String username = parts[0].trim();
+                String priority = parts[1].trim();
+                
+                User user = new User(username, priority);
+                listOfUsers.add(user);
+            }
+            
+            reader.close();            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CargarArchivoActionPerformed
 
     private void UserLis2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserLis2FocusGained

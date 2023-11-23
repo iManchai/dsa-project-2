@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package dsa.project.pkg2;
-import interfaz.Interfaz;
+import interfaz.interfaz;
 import edd.*;
 
 /**
@@ -20,7 +20,7 @@ public class DsaProject2 {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Interfaz().setVisible(true);
+                new interfaz().setVisible(true);
             }
         });
     }

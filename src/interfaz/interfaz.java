@@ -307,7 +307,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         Ejemplo4.setText("Lista de Documentos");
 
-        Ejemplo5.setText("Lista de usuarios");
+        Ejemplo5.setText("Lista de Usuarios");
 
         javax.swing.GroupLayout TabEliminarLayout = new javax.swing.GroupLayout(TabEliminar);
         TabEliminar.setLayout(TabEliminarLayout);
@@ -608,6 +608,14 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
     private void BorrarDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarDocMouseClicked
         // TODO add your handling code here:
+        for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
+            if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
+            listOfUsers.remove(NodoUser.getValue());
+            break;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Usuario borrado:");
+        UserList.requestFocus();  
     }//GEN-LAST:event_BorrarDocMouseClicked
 
     private void UserListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserListFocusGained
@@ -620,10 +628,26 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
     private void BorrarUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarUserMouseClicked
         // TODO add your handling code here:
+        for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
+            if (UserList1.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
+                listOfUsers.remove(NodoUser.getValue());
+                break;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Usuario borrado:");
+        UserList1.requestFocus();  
     }//GEN-LAST:event_BorrarUserMouseClicked
 
     private void DocListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocListFocusGained
         // TODO add your handling code here:
+        DocList.removeAllItems();
+        for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
+            if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())){
+                for (int i = 0; i <= NodoUser.getValue().getDocuments().getSize() -1; i++) {
+                    DocList.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+                }
+            }
+        }
     }//GEN-LAST:event_DocListFocusGained
 
     private void UserList2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList2FocusGained
@@ -636,6 +660,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
     private void DocList1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocList1FocusGained
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_DocList1FocusGained
 
     private void UserList3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList3FocusGained
@@ -656,6 +681,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
     private void DocList2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocList2FocusGained
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_DocList2FocusGained
 
     private void BotonImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonImprimirMouseClicked
@@ -676,12 +702,18 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             AñadirNombreDoc.requestFocus();
         } else {
             // Chequear si Existe Documento
+            check = CheckDocumento(AñadirNombreDoc.getText().trim(), UserList2);
                 if (check == 1) {
                     JOptionPane.showMessageDialog(null, "El Documento Existe, Ingrese otro:");
                     AñadirNombreDoc.requestFocus();
                 } else {
-                    listOfUsers.add(new User(AñadirNombreDoc.getText(), (String) TiposdeDoc.getSelectedItem()));
+                    for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
+                        if (UserList2.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
+                            NodoUser.getValue().getDocuments().add(new Document(AñadirNombreDoc.getText().trim(), TiposdeDoc.getSelectedItem().toString(), Integer.valueOf(Tamaño.getText().trim())));
+                        }
+                    }
                     JOptionPane.showMessageDialog(null, "Documento añadido al usuario:");
+                    
                 } 
         }
     }//GEN-LAST:event_AñadirDocMouseClicked
@@ -787,5 +819,20 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 }
             }
             return check;
-        }    
+        } 
+    
+    public int CheckDocumento(String documento, javax.swing.JComboBox<String> combobox) {
+            int check = 0;
+            for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
+                if (combobox.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
+                    for (Nodo<Document> NodoDocumento = NodoUser.getValue().getDocuments().getHead() ;  NodoDocumento != null ; NodoDocumento = NodoDocumento.getNext()) {
+                        if (NodoDocumento.getValue().getName().equals(documento)) {
+                        check = 1;
+                        break;
+                        }
+                    }
+                }
+            }
+            return check;
+        } 
 }

@@ -542,7 +542,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="Ejemplo5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Lista de usuarios"/>
+                <Property name="text" type="java.lang.String" value="Lista de Usuarios"/>
               </Properties>
             </Component>
           </SubComponents>

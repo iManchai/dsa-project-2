@@ -4,6 +4,7 @@
  */
 package dsa.project.pkg2;
 import edd.*;
+import interfaz.interfaz;
 
 /**
  *
@@ -16,8 +17,14 @@ public class DsaProject2 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        CreateHashTable hashtable = new CreateHashTable();
-        hashtable.createHashtable();
+        //CreateHashTable hashtable = new CreateHashTable();
+        //hashtable.createHashtable();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new interfaz().setVisible(true);
+            }
+        });
     }
     
 }

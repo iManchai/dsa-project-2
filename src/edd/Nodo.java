@@ -15,7 +15,7 @@ public class Nodo<T> {
      * @field next: Apuntador al nodo siguiente
      */
     private T value;
-    private Nodo next;
+    Nodo next;
     
     /**
      * Constructor del nodo

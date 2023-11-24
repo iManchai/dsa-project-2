@@ -13,6 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import edd.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,7 +52,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         CargarArchivo = new javax.swing.JButton();
         Tabs = new javax.swing.JTabbedPane();
         TabAñadirDoc = new javax.swing.JPanel();
-        UserLis2 = new javax.swing.JComboBox<>();
         Users = new javax.swing.JLabel();
         NombreUser = new javax.swing.JLabel();
         Ejemplo = new javax.swing.JLabel();
@@ -59,8 +59,10 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         AñadirNombreDoc = new javax.swing.JTextField();
         TiposdeDoc = new javax.swing.JComboBox<>();
         AñadirDoc = new javax.swing.JButton();
-        TamañoDoc = new javax.swing.JLabel();
+        PaginasDoc = new javax.swing.JLabel();
         Tamaño = new javax.swing.JTextField();
+        Ejemplo2 = new javax.swing.JLabel();
+        UserList2 = new javax.swing.JComboBox<>();
         TabAñadirUser = new javax.swing.JPanel();
         Prioridades = new javax.swing.JComboBox<>();
         Prioridad = new javax.swing.JLabel();
@@ -74,7 +76,23 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         UserList = new javax.swing.JComboBox<>();
         BorrarDoc = new javax.swing.JButton();
         UserList1 = new javax.swing.JComboBox<>();
+        Ejemplo3 = new javax.swing.JLabel();
+        Ejemplo4 = new javax.swing.JLabel();
+        Ejemplo5 = new javax.swing.JLabel();
         TabVer = new javax.swing.JPanel();
+        Cola = new javax.swing.JPanel();
+        BotonImprimir = new javax.swing.JButton();
+        Buscar = new javax.swing.JLabel();
+        DocList1 = new javax.swing.JComboBox<>();
+        Buscar1 = new javax.swing.JLabel();
+        TituloElimimar = new javax.swing.JLabel();
+        UserList3 = new javax.swing.JComboBox<>();
+        ManejarCola = new javax.swing.JPanel();
+        UserList4 = new javax.swing.JComboBox<>();
+        Buscar2 = new javax.swing.JLabel();
+        DocList2 = new javax.swing.JComboBox<>();
+        Buscar3 = new javax.swing.JLabel();
+        Mandar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +100,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Titulo.setText("Reloj");
 
-        horas24.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        horas24.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         horas24.setForeground(new java.awt.Color(255, 51, 51));
         horas24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -105,14 +123,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             }
         });
 
-        UserLis2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
-        UserLis2.setToolTipText("");
-        UserLis2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                UserLis2FocusGained(evt);
-            }
-        });
-
         Users.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Users.setText("Users");
 
@@ -128,9 +138,23 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         TiposdeDoc.setToolTipText("");
 
         AñadirDoc.setText("Añadir");
+        AñadirDoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AñadirDocMouseClicked(evt);
+            }
+        });
 
-        TamañoDoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TamañoDoc.setText("Tamaño del Documento");
+        PaginasDoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PaginasDoc.setText("Numero de paginas");
+
+        Ejemplo2.setText("Numero de paginas: 35");
+
+        UserList2.setToolTipText("");
+        UserList2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                UserList2FocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout TabAñadirDocLayout = new javax.swing.GroupLayout(TabAñadirDoc);
         TabAñadirDoc.setLayout(TabAñadirDocLayout);
@@ -142,18 +166,21 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                     .addComponent(TipoDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(NombreUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TamañoDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PaginasDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(UserLis2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(TabAñadirDocLayout.createSequentialGroup()
                         .addComponent(AñadirNombreDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Ejemplo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TiposdeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(AñadirDoc)
-                        .addComponent(Tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(TabAñadirDocLayout.createSequentialGroup()
+                        .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AñadirDoc)
+                            .addComponent(Tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(Ejemplo2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UserList2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         TabAñadirDocLayout.setVerticalGroup(
@@ -162,7 +189,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 .addGap(52, 52, 52)
                 .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UserLis2))
+                    .addComponent(UserList2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,8 +201,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                     .addComponent(TiposdeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TabAñadirDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TamañoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PaginasDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Tamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ejemplo2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(AñadirDoc)
                 .addContainerGap(93, Short.MAX_VALUE))
@@ -192,9 +220,14 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         NombreUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         NombreUser1.setText("Nombre del Usuario");
 
-        Ejemplo1.setText("Ejemplo: @Xx_Destroyer_xX");
+        Ejemplo1.setText("Ejemplo: Xx_Destroyer_xX");
 
         AñadirUser.setText("Añadir");
+        AñadirUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AñadirUserMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout TabAñadirUserLayout = new javax.swing.GroupLayout(TabAñadirUser);
         TabAñadirUser.setLayout(TabAñadirUserLayout);
@@ -270,44 +303,57 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        Ejemplo3.setText("Lista de Usuarios");
+
+        Ejemplo4.setText("Lista de Documentos");
+
+        Ejemplo5.setText("Lista de usuarios");
+
         javax.swing.GroupLayout TabEliminarLayout = new javax.swing.GroupLayout(TabEliminar);
         TabEliminar.setLayout(TabEliminarLayout);
         TabEliminarLayout.setHorizontalGroup(
             TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TabEliminarLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addComponent(Ejemplo5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(UserList1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(TabEliminarLayout.createSequentialGroup()
-                        .addGap(113, 113, 113)
+                        .addGap(130, 130, 130)
                         .addComponent(BorrarUser)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
-                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BorrarDoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(UserList, javax.swing.GroupLayout.Alignment.TRAILING, 0, 144, Short.MAX_VALUE))
-                    .addComponent(DocList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(156, 156, 156))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(TabEliminarLayout.createSequentialGroup()
+                        .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BorrarDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(UserList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(Ejemplo3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(TabEliminarLayout.createSequentialGroup()
+                        .addComponent(DocList, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Ejemplo4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
         TabEliminarLayout.setVerticalGroup(
             TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TabEliminarLayout.createSequentialGroup()
-                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabEliminarLayout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DocList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UserList1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(UserList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BorrarUser)
-                        .addGap(18, 18, 18)))
+                .addGap(79, 79, 79)
+                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UserList1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ejemplo3)
+                    .addComponent(Ejemplo5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DocList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ejemplo4)
+                    .addComponent(BorrarUser))
+                .addGap(18, 18, 18)
                 .addComponent(BorrarDoc)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         Tabs.addTab("Eliminar", TabEliminar);
@@ -324,6 +370,146 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         );
 
         Tabs.addTab("Ver Árbol", TabVer);
+
+        BotonImprimir.setText("Imprimir");
+        BotonImprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonImprimirMouseClicked(evt);
+            }
+        });
+
+        Buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Buscar.setText("Buscar Usuario");
+
+        DocList1.setToolTipText("");
+        DocList1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DocList1FocusGained(evt);
+            }
+        });
+
+        Buscar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Buscar1.setText("Buscar Documento en Cola");
+
+        TituloElimimar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        TituloElimimar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TituloElimimar.setText("Eliminar");
+
+        UserList3.setToolTipText("");
+        UserList3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                UserList3FocusGained(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ColaLayout = new javax.swing.GroupLayout(Cola);
+        Cola.setLayout(ColaLayout);
+        ColaLayout.setHorizontalGroup(
+            ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ColaLayout.createSequentialGroup()
+                .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ColaLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(BotonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134)
+                        .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Buscar1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                .addComponent(DocList1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(UserList3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ColaLayout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(TituloElimimar, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(173, Short.MAX_VALUE))
+        );
+        ColaLayout.setVerticalGroup(
+            ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ColaLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(TituloElimimar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Buscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ColaLayout.createSequentialGroup()
+                        .addComponent(BotonImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE))
+                    .addGroup(ColaLayout.createSequentialGroup()
+                        .addComponent(UserList3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(Buscar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
+        );
+
+        Tabs.addTab("Manejar Cola de Impresión", Cola);
+
+        UserList4.setToolTipText("");
+        UserList4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                UserList4FocusGained(evt);
+            }
+        });
+
+        Buscar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Buscar2.setText("Buscar Usuario");
+
+        DocList2.setToolTipText("");
+        DocList2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DocList2FocusGained(evt);
+            }
+        });
+
+        Buscar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Buscar3.setText("Buscar Documento");
+
+        Mandar.setText("Mandar a la Cola");
+        Mandar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MandarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ManejarColaLayout = new javax.swing.GroupLayout(ManejarCola);
+        ManejarCola.setLayout(ManejarColaLayout);
+        ManejarColaLayout.setHorizontalGroup(
+            ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ManejarColaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Buscar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DocList2, 0, 144, Short.MAX_VALUE)
+                    .addComponent(Buscar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(UserList4, 0, 144, Short.MAX_VALUE))
+                .addGap(131, 131, 131))
+            .addGroup(ManejarColaLayout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(Mandar)
+                .addContainerGap(418, Short.MAX_VALUE))
+        );
+        ManejarColaLayout.setVerticalGroup(
+            ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ManejarColaLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(Buscar2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(UserList4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ManejarColaLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(Buscar3))
+                    .addGroup(ManejarColaLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(Mandar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DocList2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+
+        Tabs.addTab("Agregar a la Cola", ManejarCola);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,11 +548,13 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                         .addComponent(College)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Names))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(horas24, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(horas24, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -391,14 +579,13 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         File fileName = fileChooser.getSelectedFile();
         BufferedReader reader = null;
         
-        try {
+        try {          
             reader = new BufferedReader(new FileReader(fileName.getAbsolutePath()));
-            String lineText = reader.readLine();
-            while (lineText != null) {
-                String[] parts = lineText.split(",");
-                String username = parts[0].trim();
-                String priority = parts[1].trim();
-                
+            String lineText;
+            while ((lineText = reader.readLine()) != null) {
+                String parts[] = lineText.split(",");
+                String username = parts[0];
+                String priority = parts[1];
                 User user = new User(username, priority);
                 listOfUsers.add(user);
             }
@@ -411,29 +598,112 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         }
     }//GEN-LAST:event_CargarArchivoActionPerformed
 
-    private void UserLis2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserLis2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserLis2FocusGained
-
-    private void DocListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocListFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DocListFocusGained
-
-    private void BorrarUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarUserMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BorrarUserMouseClicked
-
-    private void UserListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserListFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserListFocusGained
-
     private void UserList1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList1FocusGained
         // TODO add your handling code here:
+        UserList1.removeAllItems();
+        for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
+            UserList1.addItem(listOfUsers.get(i).getUsername());
+        }
     }//GEN-LAST:event_UserList1FocusGained
 
     private void BorrarDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarDocMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_BorrarDocMouseClicked
+
+    private void UserListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserListFocusGained
+        // TODO add your handling code here:
+        UserList.removeAllItems();
+        for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
+            UserList.addItem(listOfUsers.get(i).getUsername());
+        }
+    }//GEN-LAST:event_UserListFocusGained
+
+    private void BorrarUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarUserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BorrarUserMouseClicked
+
+    private void DocListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocListFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DocListFocusGained
+
+    private void UserList2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList2FocusGained
+        // TODO add your handling code here:
+        UserList2.removeAllItems();
+        for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
+            UserList2.addItem(listOfUsers.get(i).getUsername());
+        }
+    }//GEN-LAST:event_UserList2FocusGained
+
+    private void DocList1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocList1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DocList1FocusGained
+
+    private void UserList3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList3FocusGained
+        // TODO add your handling code here:
+        UserList3.removeAllItems();
+        for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
+            UserList3.addItem(listOfUsers.get(i).getUsername());
+        }
+    }//GEN-LAST:event_UserList3FocusGained
+
+    private void UserList4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList4FocusGained
+        // TODO add your handling code here:
+        UserList4.removeAllItems();
+        for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
+            UserList4.addItem(listOfUsers.get(i).getUsername());
+        }
+    }//GEN-LAST:event_UserList4FocusGained
+
+    private void DocList2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocList2FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DocList2FocusGained
+
+    private void BotonImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonImprimirMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_BotonImprimirMouseClicked
+
+    private void MandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MandarMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_MandarMouseClicked
+
+    private void AñadirDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirDocMouseClicked
+        // TODO add your handling code here:
+        int check = 0;
+        if ("".equals(AñadirNombreDoc.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "Ingrese Documento:");
+            AñadirNombreDoc.requestFocus();
+        } else {
+            // Chequear si Existe Documento
+                if (check == 1) {
+                    JOptionPane.showMessageDialog(null, "El Documento Existe, Ingrese otro:");
+                    AñadirNombreDoc.requestFocus();
+                } else {
+                    listOfUsers.add(new User(AñadirNombreDoc.getText(), (String) TiposdeDoc.getSelectedItem()));
+                    JOptionPane.showMessageDialog(null, "Documento añadido al usuario:");
+                } 
+        }
+    }//GEN-LAST:event_AñadirDocMouseClicked
+
+    private void AñadirUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirUserMouseClicked
+        // TODO add your handling code here:
+        int check = 0;
+        if ("".equals(AñadirNombreUser.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "Ingrese Usuario:");
+            AñadirNombreUser.requestFocus();
+        } else {
+            // Chequear si Existe Usuario
+                check = CheckUsuario(AñadirNombreUser.getText());
+                if (check == 1) {
+                    JOptionPane.showMessageDialog(null, "El Usuario Existe, Ingrese otro nombre:");
+                    AñadirNombreUser.requestFocus();
+                } else {
+                    listOfUsers.add(new User(AñadirNombreUser.getText(), (String) Prioridades.getSelectedItem()));
+                    JOptionPane.showMessageDialog(null, "Usuario añadido a la lista de usuarios:");
+                } 
+        }
+    }//GEN-LAST:event_AñadirUserMouseClicked
 
     public static void main(String[] args) {
         
@@ -447,14 +717,29 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JButton AñadirUser;
     private javax.swing.JButton BorrarDoc;
     private javax.swing.JButton BorrarUser;
+    private javax.swing.JButton BotonImprimir;
+    private javax.swing.JLabel Buscar;
+    private javax.swing.JLabel Buscar1;
+    private javax.swing.JLabel Buscar2;
+    private javax.swing.JLabel Buscar3;
     private javax.swing.JButton CargarArchivo;
+    private javax.swing.JPanel Cola;
     private javax.swing.JLabel College;
     private javax.swing.JComboBox<String> DocList;
+    private javax.swing.JComboBox<String> DocList1;
+    private javax.swing.JComboBox<String> DocList2;
     private javax.swing.JLabel Ejemplo;
     private javax.swing.JLabel Ejemplo1;
+    private javax.swing.JLabel Ejemplo2;
+    private javax.swing.JLabel Ejemplo3;
+    private javax.swing.JLabel Ejemplo4;
+    private javax.swing.JLabel Ejemplo5;
+    private javax.swing.JButton Mandar;
+    private javax.swing.JPanel ManejarCola;
     private javax.swing.JLabel Names;
     private javax.swing.JLabel NombreUser;
     private javax.swing.JLabel NombreUser1;
+    private javax.swing.JLabel PaginasDoc;
     private javax.swing.JLabel Prioridad;
     private javax.swing.JComboBox<String> Prioridades;
     private javax.swing.JLabel Proyect;
@@ -464,13 +749,15 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JPanel TabVer;
     private javax.swing.JTabbedPane Tabs;
     private javax.swing.JTextField Tamaño;
-    private javax.swing.JLabel TamañoDoc;
     private javax.swing.JLabel TipoDoc;
     private javax.swing.JComboBox<String> TiposdeDoc;
     private javax.swing.JLabel Titulo;
-    private javax.swing.JComboBox<String> UserLis2;
+    private javax.swing.JLabel TituloElimimar;
     private javax.swing.JComboBox<String> UserList;
     private javax.swing.JComboBox<String> UserList1;
+    private javax.swing.JComboBox<String> UserList2;
+    private javax.swing.JComboBox<String> UserList3;
+    private javax.swing.JComboBox<String> UserList4;
     private javax.swing.JLabel Users;
     private javax.swing.JLabel horas24;
     // End of variables declaration//GEN-END:variables
@@ -490,5 +777,15 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             horas24.setText(time24);
         }
     }
-
+    
+    public int CheckUsuario(String usuario) {
+            int check = 0;
+            for (int i = 0; i <= listOfUsers.getSize() - 1; i++) {
+                if (usuario.equals(listOfUsers.get(i).getUsername())) {
+                    check = 1;
+                    break;
+                }
+            }
+            return check;
+        }    
 }

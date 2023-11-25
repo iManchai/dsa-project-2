@@ -20,7 +20,15 @@ import javax.swing.JOptionPane;
  * @author manch
  */
 public class interfaz extends javax.swing.JFrame implements Runnable{
-
+    
+    /**
+     * Atributos del Reloj
+     * @field hour : horas del día
+     * @field minute : minutos del día
+     * @field second : segundos del día
+     * @field lista de usuarios
+     * @field monticulo binario
+     */
     int hour,minute,second;
     public LinkedList<User> listOfUsers = new LinkedList();
     public MinBinaryHeap heap = new MinBinaryHeap(50);
@@ -30,7 +38,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
      */
     public interfaz() {
         initComponents(); 
-        //creando 
+        /**
+         * Creando
+         */
         Thread t = new Thread(this);
         t.start();
     }
@@ -90,7 +100,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         UserList3 = new javax.swing.JComboBox<>();
         TituloElimimar1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        EliminarCola = new javax.swing.JButton();
         ManejarCola = new javax.swing.JPanel();
         UserList4 = new javax.swing.JComboBox<>();
         Buscar2 = new javax.swing.JLabel();
@@ -423,15 +433,10 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jButton1.setText("Eliminar de la cola");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        EliminarCola.setText("Eliminar de la cola");
+        EliminarCola.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                EliminarColaMouseClicked(evt);
             }
         });
 
@@ -464,7 +469,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                                 .addGap(121, 121, 121))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EliminarCola, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(118, 118, 118))))
         );
         ColaLayout.setVerticalGroup(
@@ -491,7 +496,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                         .addGap(13, 13, 13)
                         .addComponent(BotonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                .addComponent(EliminarCola)
                 .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                 .addContainerGap()
@@ -621,7 +626,10 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void CargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoActionPerformed
-        // TODO add your handling code here:
+        /**
+         * Buscador de archivos
+         * Accede todos los documentos del ordenador
+         */
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
@@ -632,6 +640,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         File fileName = fileChooser.getSelectedFile();
         BufferedReader reader = null;
         
+        /**
+         * Lector de archivos csv
+         */
         try {          
             reader = new BufferedReader(new FileReader(fileName.getAbsolutePath()));
             String lineText;
@@ -658,7 +669,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_CargarArchivoActionPerformed
 
     private void UserList1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList1FocusGained
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de usuarios existentes por el ComboBox  
+         */
         UserList1.removeAllItems();
         for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
             UserList1.addItem(listOfUsers.get(i).getUsername());
@@ -666,7 +679,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_UserList1FocusGained
 
     private void BorrarDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarDocMouseClicked
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de usuarios existentes por el ComboBox
+         * Accede a la lista de documentos asociados a un usuario existentes por el ComboBox
+         * Borra el documento asociado al usuario utiizando la lista de usuarios y de documentos y los nodos de estos
+         */
         for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
             if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
                 User user = NodoUser.getValue();
@@ -683,7 +700,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_BorrarDocMouseClicked
 
     private void UserListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserListFocusGained
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de usuarios existentes por el ComboBox  
+         */
         UserList.removeAllItems();
         for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
             UserList.addItem(listOfUsers.get(i).getUsername());
@@ -691,7 +710,10 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_UserListFocusGained
 
     private void BorrarUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarUserMouseClicked
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de usuarios existentes por el ComboBox 
+         * Borra el usuario utiizando la lista de usuarios y los nodos de dichos usuarios
+         */
         for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
             if (UserList1.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
                 listOfUsers.remove(NodoUser.getValue());
@@ -703,7 +725,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_BorrarUserMouseClicked
 
     private void DocListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocListFocusGained
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de documentos asociados a un usuario existentes por el ComboBox  
+         */
         DocList.removeAllItems();
         for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
             if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())){
@@ -715,7 +739,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_DocListFocusGained
 
     private void UserList2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList2FocusGained
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de usuarios existentes por el ComboBox  
+         */
         UserList2.removeAllItems();
         for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
             UserList2.addItem(listOfUsers.get(i).getUsername());
@@ -723,12 +749,23 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_UserList2FocusGained
 
     private void DocList1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocList1FocusGained
-        // TODO add your handling code here:
-        
+        /**
+         * Accede a la lista de documentos asociados a un usuario existentes por el ComboBox    
+         */
+        DocList1.removeAllItems();
+        for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
+            if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())){
+                for (int i = 0; i <= NodoUser.getValue().getDocuments().getSize() -1; i++) {
+                    DocList1.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+                }
+            }
+        }
     }//GEN-LAST:event_DocList1FocusGained
 
     private void UserList3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList3FocusGained
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de usuarios existentes por el ComboBox 
+         */
         UserList3.removeAllItems();
         for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
             UserList3.addItem(listOfUsers.get(i).getUsername());
@@ -736,7 +773,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_UserList3FocusGained
 
     private void UserList4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList4FocusGained
-        // TODO add your handling code here:
+        /**
+         * Accede a la lista de usuarios existentes por el ComboBox 
+         */
         UserList4.removeAllItems();
         for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
             UserList4.addItem(listOfUsers.get(i).getUsername());
@@ -744,22 +783,40 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_UserList4FocusGained
 
     private void DocList2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocList2FocusGained
-        // TODO add your handling code here:
-        
+        /**
+         * Accede a la lista de documentos asociados a un usuario existentes por el ComboBox    
+         */
+        DocList2.removeAllItems();
+        for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
+            if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())){
+                for (int i = 0; i <= NodoUser.getValue().getDocuments().getSize() -1; i++) {
+                    DocList2.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+                }
+            }
+        }
     }//GEN-LAST:event_DocList2FocusGained
 
     private void BotonImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonImprimirMouseClicked
-        // TODO add your handling code here:
+       /**
+        * 
+        */
         
     }//GEN-LAST:event_BotonImprimirMouseClicked
 
     private void MandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MandarMouseClicked
-        // TODO add your handling code here:
+        /**
+         * 
+         */
         
     }//GEN-LAST:event_MandarMouseClicked
 
     private void AñadirDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirDocMouseClicked
-        // TODO add your handling code here:
+        /**
+         * Accede al ComboBox de usuarios para agregarle el documento
+         * Accede al texto ingresado en el text field
+         * Corre el código de CheckDocumento para ver si el documento es repetido
+         * Añade el documento al usuario (si no está repetido)  
+         */
         int check = 0;
         if ("".equals(AñadirNombreDoc.getText().trim())) {
             JOptionPane.showMessageDialog(null, "Ingrese Documento:");
@@ -787,7 +844,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_AñadirDocMouseClicked
 
     private void AñadirUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirUserMouseClicked
-        // TODO add your handling code here:
+        /**
+         * Accede al texto ingresado en el text field
+         * Corre el código de CheckUsuario para ver si el usuario es repetido
+         * Añade el usuario a la lista de usuarios (si no está repetido) 
+         */
         int check = 0;
         if ("".equals(AñadirNombreUser.getText().trim())) {
             JOptionPane.showMessageDialog(null, "Ingrese Usuario:");
@@ -805,13 +866,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         }
     }//GEN-LAST:event_AñadirUserMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void EliminarColaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarColaMouseClicked
+        /**
+         * 
+         */
+    }//GEN-LAST:event_EliminarColaMouseClicked
 
     public static void main(String[] args) {
         
@@ -842,6 +901,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel Ejemplo3;
     private javax.swing.JLabel Ejemplo4;
     private javax.swing.JLabel Ejemplo5;
+    private javax.swing.JButton EliminarCola;
     private javax.swing.JButton Mandar;
     private javax.swing.JPanel ManejarCola;
     private javax.swing.JLabel Names;
@@ -869,11 +929,15 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JComboBox<String> UserList4;
     private javax.swing.JLabel Users;
     private javax.swing.JLabel horas24;
-    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
-
+    
+    /**
+     * Continuación reloj
+     * Obtiene valores del calendario
+     * Formato de 24 horas
+     */
     @Override
     public void run() {
         while(true) {
@@ -890,6 +954,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         }
     }
     
+    /**
+     * Código para chequear usuario existente
+     * @param usuario String
+     * @return si Usuario Existe
+     */
     public int CheckUsuario(String usuario) {
             int check = 0;
             for (int i = 0; i <= listOfUsers.getSize() - 1; i++) {
@@ -901,6 +970,13 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             return check;
         } 
     
+    /**
+     * Código para chequear documento existente
+     * @param documento String
+     * @param usuario String
+     * @param ComboBox javax.swing.JComboBox<String> 
+     * @return si Documento Existe
+     */
     public int CheckDocumento(String documento, javax.swing.JComboBox<String> combobox) {
             int check = 0;
             for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {

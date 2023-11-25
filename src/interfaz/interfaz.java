@@ -11,9 +11,19 @@ import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import edd.*;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -31,7 +41,8 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
      */
     int hour,minute,second;
     public LinkedList<User> listOfUsers = new LinkedList();
-    public MinBinaryHeap heap = new MinBinaryHeap(50);
+    public MinBinaryHeap heap = new MinBinaryHeap(25);
+    public HashTable hashTable = new HashTable();
     
     /**
      * Creates new form interfaz
@@ -91,6 +102,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         Ejemplo5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         TabVer = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaCola = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         Cola = new javax.swing.JPanel();
         BotonImprimir = new javax.swing.JButton();
         Buscar = new javax.swing.JLabel();
@@ -100,13 +114,14 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         UserList3 = new javax.swing.JComboBox<>();
         TituloElimimar1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        EliminarCola = new javax.swing.JButton();
+        BorrarDocCola = new javax.swing.JButton();
         ManejarCola = new javax.swing.JPanel();
         UserList4 = new javax.swing.JComboBox<>();
         Buscar2 = new javax.swing.JLabel();
         DocList2 = new javax.swing.JComboBox<>();
         Buscar3 = new javax.swing.JLabel();
         Mandar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -383,18 +398,58 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         Tabs.addTab("Eliminar", TabEliminar);
 
+        TablaCola.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Tipo", "Tiempo en cola", "Tamaño"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaCola.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(TablaCola);
+        if (TablaCola.getColumnModel().getColumnCount() > 0) {
+            TablaCola.getColumnModel().getColumn(0).setResizable(false);
+            TablaCola.getColumnModel().getColumn(1).setResizable(false);
+            TablaCola.getColumnModel().getColumn(2).setResizable(false);
+            TablaCola.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jLabel1.setText("Formato cola");
+
         javax.swing.GroupLayout TabVerLayout = new javax.swing.GroupLayout(TabVer);
         TabVer.setLayout(TabVerLayout);
         TabVerLayout.setHorizontalGroup(
             TabVerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(TabVerLayout.createSequentialGroup()
+                .addGroup(TabVerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabVerLayout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(jLabel1))
+                    .addGroup(TabVerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         TabVerLayout.setVerticalGroup(
             TabVerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 308, Short.MAX_VALUE)
+            .addGroup(TabVerLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        Tabs.addTab("Ver Árbol", TabVer);
+        Tabs.addTab("Ver Cola", TabVer);
 
         BotonImprimir.setText("Imprimir");
         BotonImprimir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,7 +469,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         });
 
         Buscar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Buscar1.setText("Buscar Documento en Cola");
+        Buscar1.setText("Documento en Cola");
 
         TituloElimimar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TituloElimimar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -433,10 +488,10 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        EliminarCola.setText("Eliminar de la cola");
-        EliminarCola.addMouseListener(new java.awt.event.MouseAdapter() {
+        BorrarDocCola.setText("Eliminar de la cola");
+        BorrarDocCola.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EliminarColaMouseClicked(evt);
+                BorrarDocColaMouseClicked(evt);
             }
         });
 
@@ -462,15 +517,18 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                                     .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(60, 60, 60))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
-                                .addComponent(Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(123, 123, 123))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                                 .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(121, 121, 121))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EliminarCola, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118))))
+                        .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                                .addComponent(BorrarDocCola, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(118, 118, 118))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                                .addComponent(Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(87, 87, 87))))))
+
         );
         ColaLayout.setVerticalGroup(
             ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,7 +554,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                         .addGap(13, 13, 13)
                         .addComponent(BotonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
-                .addComponent(EliminarCola)
+                .addComponent(BorrarDocCola)
                 .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                 .addContainerGap()
@@ -515,7 +573,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         Buscar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Buscar2.setText("Buscar Usuario");
 
-        DocList2.setToolTipText("");
+        DocList2.setToolTipText("Documentos que NO han sido enviados aun a la cola");
         DocList2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 DocList2FocusGained(evt);
@@ -532,6 +590,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel2.setText("*Estos no han sido enviados aun a la cola");
+
         javax.swing.GroupLayout ManejarColaLayout = new javax.swing.GroupLayout(ManejarCola);
         ManejarCola.setLayout(ManejarColaLayout);
         ManejarColaLayout.setHorizontalGroup(
@@ -546,9 +607,10 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                     .addGroup(ManejarColaLayout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Mandar, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                            .addComponent(Mandar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(DocList2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(UserList4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(UserList4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))))
                 .addContainerGap(291, Short.MAX_VALUE))
         );
         ManejarColaLayout.setVerticalGroup(
@@ -562,9 +624,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 .addComponent(Buscar3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DocList2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(22, 22, 22)
                 .addComponent(Mandar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         Tabs.addTab("Agregar a la Cola", ManejarCola);
@@ -721,6 +785,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             }
         }
         JOptionPane.showMessageDialog(null, "Usuario borrado:");
+        UserList.requestFocus();
         UserList1.requestFocus();  
     }//GEN-LAST:event_BorrarUserMouseClicked
 
@@ -786,11 +851,14 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         /**
          * Accede a la lista de documentos asociados a un usuario existentes por el ComboBox    
          */
+        // TODO add your handling code here:
         DocList2.removeAllItems();
         for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
-            if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())){
+            if (UserList4.getSelectedItem().equals(NodoUser.getValue().getUsername())){
                 for (int i = 0; i <= NodoUser.getValue().getDocuments().getSize() -1; i++) {
-                    DocList2.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+                    if (!NodoUser.getValue().getDocuments().get(i).isIsInPQ()) {
+                        DocList2.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+                    }
                 }
             }
         }
@@ -804,10 +872,45 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_BotonImprimirMouseClicked
 
     private void MandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MandarMouseClicked
-        /**
-         * 
-         */
-        
+        // TODO add your handling code here:
+        for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
+            if (UserList4.getSelectedItem().equals(NodoUser.getValue().getUsername())){
+                    User user = NodoUser.getValue();
+                for (Nodo<Document> NodoDocumento = user.getDocuments().getHead(); NodoDocumento != null ; NodoDocumento = NodoDocumento.getNext()) {
+                    if (NodoDocumento.getValue().getName().equals(DocList2.getSelectedItem())) {
+                        Document documento = NodoDocumento.getValue();
+                        if (user.getType().equals("prioridad_alta")) {
+                            documento.setTimeSendToPriorityQueue(System.currentTimeMillis() - 300000);
+                        } else if (user.getType().equals("prioridad_media")) {
+                            documento.setTimeSendToPriorityQueue(System.currentTimeMillis() - 180000);
+                        } else {
+                            documento.setTimeSendToPriorityQueue(System.currentTimeMillis());
+                        }
+                        documento.setIsInPQ(true);
+                        heap.insert(documento);
+                        hashTable.put(UserList4.getSelectedItem().toString(), documento);
+                        
+                        // Vista de la cola de prioridad
+                        DefaultTableModel model = (DefaultTableModel) TablaCola.getModel();
+                        DateFormat obj = new SimpleDateFormat("HH:mm:ss"); 
+                        
+                        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+                        sorter.setSortKeys(Collections.singletonList(
+                            new RowSorter.SortKey(2, SortOrder.ASCENDING)));
+                        TablaCola.setRowSorter(sorter);
+                        
+                        model.addRow(new Object[] {documento.getName(), documento.getDocument_type(), obj.format(new Date(documento.getTimeSendToPriorityQueue())), documento.getSize()});
+                        sorter.sort();
+                        sorter.setSortable(2, false);
+
+                        JOptionPane.showMessageDialog(null, "Documento enviado a la cola de prioridad");
+                        DocList2.requestFocus();
+                        
+                        break;
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_MandarMouseClicked
 
     private void AñadirDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AñadirDocMouseClicked
@@ -835,6 +938,8 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                             NodoUser.getValue().getDocuments().add(new Document(AñadirNombreDoc.getText().trim(), TiposdeDoc.getSelectedItem().toString(), size));
                         }
                     }
+                AñadirNombreDoc.setText("");
+                Tamaño.setText("");
                 JOptionPane.showMessageDialog(null, "Documento añadido al usuario:");    
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Ingrese un tamaño valido (e.g: 21)");
@@ -861,16 +966,15 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                     AñadirNombreUser.requestFocus();
                 } else {
                     listOfUsers.add(new User(AñadirNombreUser.getText(), (String) Prioridades.getSelectedItem()));
+                    AñadirNombreUser.setText("");
                     JOptionPane.showMessageDialog(null, "Usuario añadido a la lista de usuarios:");
                 } 
         }
     }//GEN-LAST:event_AñadirUserMouseClicked
 
-    private void EliminarColaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarColaMouseClicked
-        /**
-         * 
-         */
-    }//GEN-LAST:event_EliminarColaMouseClicked
+    private void BorrarDocColaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarDocColaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BorrarDocColaMouseClicked
 
     public static void main(String[] args) {
         
@@ -883,6 +987,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JTextField AñadirNombreUser;
     private javax.swing.JButton AñadirUser;
     private javax.swing.JButton BorrarDoc;
+    private javax.swing.JButton BorrarDocCola;
     private javax.swing.JButton BorrarUser;
     private javax.swing.JButton BotonImprimir;
     private javax.swing.JLabel Buscar;
@@ -915,6 +1020,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JPanel TabAñadirUser;
     private javax.swing.JPanel TabEliminar;
     private javax.swing.JPanel TabVer;
+    private javax.swing.JTable TablaCola;
     private javax.swing.JTabbedPane Tabs;
     private javax.swing.JTextField Tamaño;
     private javax.swing.JLabel TipoDoc;
@@ -929,6 +1035,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JComboBox<String> UserList4;
     private javax.swing.JLabel Users;
     private javax.swing.JLabel horas24;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables

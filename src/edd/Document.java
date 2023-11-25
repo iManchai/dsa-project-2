@@ -14,11 +14,13 @@ public class Document {
     private String documentType;
     private int size;
     private long timeSendToPriorityQueue;
+    private boolean isInPQ;
 
     public Document(String name, String document_type, int size) {
         this.name = name;
         this.documentType = document_type;
         this.size = size;
+        this.isInPQ = false;
     }
 
     public String getName() {
@@ -40,8 +42,14 @@ public class Document {
     public void setTimeSendToPriorityQueue(long timeSendToPriorityQueue) {
         this.timeSendToPriorityQueue = timeSendToPriorityQueue;
     }
-    
-    
+
+    public boolean isIsInPQ() {
+        return isInPQ;
+    }
+
+    public void setIsInPQ(boolean isInPQ) {
+        this.isInPQ = isInPQ;
+    }
     
     
     

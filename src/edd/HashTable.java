@@ -10,35 +10,30 @@ import java.io.IOException;
 
 
 public class HashTable {
-    private Entry[] users;
-    private int capacity = 16;
+    private LinkedList<Entry>[] listOfHashTable;
+    private int capacity = 20;
 
     public HashTable() {
-        users = new Entry[capacity];
+        listOfHashTable = new LinkedList[capacity];
     }
 
-    public void put(String key, Object value) {
+    public void put(String key, Document value) {
         int index = getIndex(key);
-        Entry entry = users[index];
-        if (entry == null) {
-            entry = new Entry(key, value);
-            users[index] = entry;
+        LinkedList<Entry> docList = listOfHashTable[index];
+        if (docList == null) {
+            docList = new LinkedList();
+            docList.add(new Entry(key, value));
+            listOfHashTable[index] = docList;
         } else {
-            while (entry.next != null) {
-                entry = entry.next;
-            }
-            entry.next = new Entry(key, value);
+            docList.add(new Entry(key, value));
         }
     }
 
     public Object get(String key) {
         int index = getIndex(key);
-        Entry entry = users[index];
-        while (entry != null) {
-            if (entry.key.equals(key)) {
-                return entry.value;
-            }
-            entry = entry.next;
+        LinkedList list = listOfHashTable[index];
+        if (list != null) {
+            return list;
         }
         return null;
     }
@@ -49,13 +44,11 @@ public class HashTable {
 
     private class Entry {
         public String key;
-        public Object value;
-        public Entry next;
+        public Document value;
 
-        public Entry(String key, Object value) {
+        public Entry(String key, Document value) {
             this.key = key;
             this.value = value;
-            this.next = null;
         }
     }
 }

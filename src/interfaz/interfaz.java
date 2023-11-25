@@ -51,6 +51,13 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         Names = new javax.swing.JLabel();
         CargarArchivo = new javax.swing.JButton();
         Tabs = new javax.swing.JTabbedPane();
+        TabAñadirUser = new javax.swing.JPanel();
+        Prioridades = new javax.swing.JComboBox<>();
+        Prioridad = new javax.swing.JLabel();
+        AñadirNombreUser = new javax.swing.JTextField();
+        NombreUser1 = new javax.swing.JLabel();
+        Ejemplo1 = new javax.swing.JLabel();
+        AñadirUser = new javax.swing.JButton();
         TabAñadirDoc = new javax.swing.JPanel();
         Users = new javax.swing.JLabel();
         NombreUser = new javax.swing.JLabel();
@@ -63,13 +70,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         Tamaño = new javax.swing.JTextField();
         Ejemplo2 = new javax.swing.JLabel();
         UserList2 = new javax.swing.JComboBox<>();
-        TabAñadirUser = new javax.swing.JPanel();
-        Prioridades = new javax.swing.JComboBox<>();
-        Prioridad = new javax.swing.JLabel();
-        AñadirNombreUser = new javax.swing.JTextField();
-        NombreUser1 = new javax.swing.JLabel();
-        Ejemplo1 = new javax.swing.JLabel();
-        AñadirUser = new javax.swing.JButton();
         TabEliminar = new javax.swing.JPanel();
         DocList = new javax.swing.JComboBox<>();
         BorrarUser = new javax.swing.JButton();
@@ -79,6 +79,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         Ejemplo3 = new javax.swing.JLabel();
         Ejemplo4 = new javax.swing.JLabel();
         Ejemplo5 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         TabVer = new javax.swing.JPanel();
         Cola = new javax.swing.JPanel();
         BotonImprimir = new javax.swing.JButton();
@@ -87,6 +88,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         Buscar1 = new javax.swing.JLabel();
         TituloElimimar = new javax.swing.JLabel();
         UserList3 = new javax.swing.JComboBox<>();
+        TituloElimimar1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
         ManejarCola = new javax.swing.JPanel();
         UserList4 = new javax.swing.JComboBox<>();
         Buscar2 = new javax.swing.JLabel();
@@ -122,6 +126,63 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 CargarArchivoActionPerformed(evt);
             }
         });
+
+        Prioridades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "prioridad_alta", "prioridad_media", "prioridad_baja" }));
+        Prioridades.setToolTipText("");
+
+        Prioridad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Prioridad.setText("Prioridad");
+
+        NombreUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NombreUser1.setText("Nombre del Usuario");
+
+        Ejemplo1.setText("Ejemplo: Xx_Destroyer_xX");
+
+        AñadirUser.setText("Añadir");
+        AñadirUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AñadirUserMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TabAñadirUserLayout = new javax.swing.GroupLayout(TabAñadirUser);
+        TabAñadirUser.setLayout(TabAñadirUserLayout);
+        TabAñadirUserLayout.setHorizontalGroup(
+            TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabAñadirUserLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Prioridad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NombreUser1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabAñadirUserLayout.createSequentialGroup()
+                        .addComponent(AñadirNombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Ejemplo1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(AñadirUser)
+                        .addComponent(Prioridades, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(153, 153, 153))
+        );
+        TabAñadirUserLayout.setVerticalGroup(
+            TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabAñadirUserLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AñadirNombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NombreUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ejemplo1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Prioridades, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(AñadirUser)
+                .addContainerGap(148, Short.MAX_VALUE))
+        );
+
+        Tabs.addTab("Añadir User", TabAñadirUser);
 
         Users.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Users.setText("Users");
@@ -211,63 +272,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         Tabs.addTab("Añadir Documento", TabAñadirDoc);
 
-        Prioridades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "prioridad_alta", "prioridad_media", "prioridad_baja" }));
-        Prioridades.setToolTipText("");
-
-        Prioridad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Prioridad.setText("Prioridad");
-
-        NombreUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NombreUser1.setText("Nombre del Usuario");
-
-        Ejemplo1.setText("Ejemplo: Xx_Destroyer_xX");
-
-        AñadirUser.setText("Añadir");
-        AñadirUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AñadirUserMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout TabAñadirUserLayout = new javax.swing.GroupLayout(TabAñadirUser);
-        TabAñadirUser.setLayout(TabAñadirUserLayout);
-        TabAñadirUserLayout.setHorizontalGroup(
-            TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabAñadirUserLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Prioridad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NombreUser1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabAñadirUserLayout.createSequentialGroup()
-                        .addComponent(AñadirNombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Ejemplo1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(AñadirUser)
-                        .addComponent(Prioridades, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(153, 153, 153))
-        );
-        TabAñadirUserLayout.setVerticalGroup(
-            TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabAñadirUserLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AñadirNombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NombreUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Ejemplo1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TabAñadirUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Prioridades, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(AñadirUser)
-                .addContainerGap(148, Short.MAX_VALUE))
-        );
-
-        Tabs.addTab("Añadir User", TabAñadirUser);
-
         DocList.setToolTipText("");
         DocList.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -309,21 +313,26 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         Ejemplo5.setText("Lista de Usuarios");
 
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout TabEliminarLayout = new javax.swing.GroupLayout(TabEliminar);
         TabEliminar.setLayout(TabEliminarLayout);
         TabEliminarLayout.setHorizontalGroup(
             TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TabEliminarLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addComponent(Ejemplo5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(UserList1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TabEliminarLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(BorrarUser)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(UserList1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEliminarLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BorrarUser)
+                        .addGap(72, 72, 72)))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(TabEliminarLayout.createSequentialGroup()
                         .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -347,13 +356,19 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                     .addComponent(Ejemplo3)
                     .addComponent(Ejemplo5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DocList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Ejemplo4)
+                .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabEliminarLayout.createSequentialGroup()
+                        .addGroup(TabEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DocList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Ejemplo4))
+                        .addGap(18, 18, 18)
+                        .addComponent(BorrarDoc))
                     .addComponent(BorrarUser))
+                .addContainerGap(138, Short.MAX_VALUE))
+            .addGroup(TabEliminarLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(BorrarDoc)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addComponent(jSeparator2)
+                .addContainerGap())
         );
 
         Tabs.addTab("Eliminar", TabEliminar);
@@ -393,7 +408,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         TituloElimimar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TituloElimimar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TituloElimimar.setText("Eliminar");
+        TituloElimimar.setText("Eliminar Doc de la Cola");
 
         UserList3.setToolTipText("");
         UserList3.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -402,46 +417,85 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        TituloElimimar1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        TituloElimimar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TituloElimimar1.setText("Imprimir");
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jButton1.setText("Eliminar de la cola");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ColaLayout = new javax.swing.GroupLayout(Cola);
         Cola.setLayout(ColaLayout);
         ColaLayout.setHorizontalGroup(
             ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ColaLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TituloElimimar1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                    .addComponent(BotonImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ColaLayout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(BotonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(134, 134, 134)
-                        .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Buscar1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                .addComponent(DocList1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(UserList3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(ColaLayout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(TituloElimimar, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                        .addGap(78, 78, 78)
+                        .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                                .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(UserList3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TituloElimimar, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                                    .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(60, 60, 60))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                                .addComponent(Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(123, 123, 123))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(121, 121, 121))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(118, 118, 118))))
         );
         ColaLayout.setVerticalGroup(
             ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ColaLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(TituloElimimar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Buscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ColaLayout.createSequentialGroup()
-                        .addComponent(BotonImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(TituloElimimar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(TituloElimimar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ColaLayout.createSequentialGroup()
+                        .addComponent(Buscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(UserList3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(Buscar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                        .addGap(26, 26, 26)
+                        .addComponent(Buscar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ColaLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(BotonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addComponent(jButton1)
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1))
         );
 
         Tabs.addTab("Manejar Cola de Impresión", Cola);
@@ -477,36 +531,35 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         ManejarCola.setLayout(ManejarColaLayout);
         ManejarColaLayout.setHorizontalGroup(
             ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ManejarColaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Buscar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DocList2, 0, 144, Short.MAX_VALUE)
-                    .addComponent(Buscar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(UserList4, 0, 144, Short.MAX_VALUE))
-                .addGap(131, 131, 131))
             .addGroup(ManejarColaLayout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(Mandar)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ManejarColaLayout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Buscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Buscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ManejarColaLayout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Mandar, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                            .addComponent(DocList2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(UserList4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
         ManejarColaLayout.setVerticalGroup(
             ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManejarColaLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(45, 45, 45)
                 .addComponent(Buscar2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(UserList4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(ManejarColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ManejarColaLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(Buscar3))
-                    .addGroup(ManejarColaLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(Mandar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
+                .addComponent(Buscar3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DocList2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(Mandar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         Tabs.addTab("Agregar a la Cola", ManejarCola);
@@ -582,6 +635,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         try {          
             reader = new BufferedReader(new FileReader(fileName.getAbsolutePath()));
             String lineText;
+            lineText = reader.readLine();
             while ((lineText = reader.readLine()) != null) {
                 String parts[] = lineText.split(",");
                 String username = parts[0];
@@ -590,7 +644,12 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 listOfUsers.add(user);
             }
             
-            reader.close();            
+            reader.close();
+            UserList.requestFocus();
+            UserList1.requestFocus();
+            UserList2.requestFocus();
+            UserList3.requestFocus();
+            UserList4.requestFocus();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -610,12 +669,17 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         // TODO add your handling code here:
         for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
             if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
-            listOfUsers.remove(NodoUser.getValue());
-            break;
+                User user = NodoUser.getValue();
+                for (Nodo<Document> NodoDocument = user.getDocuments().getHead() ; NodoDocument != null ; NodoDocument = NodoDocument.getNext()) {
+                    if (NodoDocument.getValue().getName().equals(DocList.getSelectedItem())) {
+                        user.getDocuments().remove(NodoDocument.getValue());
+                        break;
+                    }
+                }
             }
         }
-        JOptionPane.showMessageDialog(null, "Usuario borrado:");
-        UserList.requestFocus();  
+        JOptionPane.showMessageDialog(null, "Documento borrado del usuario");
+        DocList.requestFocus();  
     }//GEN-LAST:event_BorrarDocMouseClicked
 
     private void UserListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserListFocusGained
@@ -703,18 +767,22 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         } else {
             // Chequear si Existe Documento
             check = CheckDocumento(AñadirNombreDoc.getText().trim(), UserList2);
-                if (check == 1) {
-                    JOptionPane.showMessageDialog(null, "El Documento Existe, Ingrese otro:");
-                    AñadirNombreDoc.requestFocus();
-                } else {
+            if (check == 1) {
+                JOptionPane.showMessageDialog(null, "El Documento Existe, Ingrese otro:");
+                AñadirNombreDoc.requestFocus();
+            } else {
+                try {
+                    int size = Integer.parseInt(Tamaño.getText().trim());
                     for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()) {
                         if (UserList2.getSelectedItem().equals(NodoUser.getValue().getUsername())) {
-                            NodoUser.getValue().getDocuments().add(new Document(AñadirNombreDoc.getText().trim(), TiposdeDoc.getSelectedItem().toString(), Integer.valueOf(Tamaño.getText().trim())));
+                            NodoUser.getValue().getDocuments().add(new Document(AñadirNombreDoc.getText().trim(), TiposdeDoc.getSelectedItem().toString(), size));
                         }
                     }
-                    JOptionPane.showMessageDialog(null, "Documento añadido al usuario:");
-                    
-                } 
+                JOptionPane.showMessageDialog(null, "Documento añadido al usuario:");    
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un tamaño valido (e.g: 21)");
+                }
+            } 
         }
     }//GEN-LAST:event_AñadirDocMouseClicked
 
@@ -736,6 +804,14 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 } 
         }
     }//GEN-LAST:event_AñadirUserMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String[] args) {
         
@@ -785,6 +861,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JComboBox<String> TiposdeDoc;
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel TituloElimimar;
+    private javax.swing.JLabel TituloElimimar1;
     private javax.swing.JComboBox<String> UserList;
     private javax.swing.JComboBox<String> UserList1;
     private javax.swing.JComboBox<String> UserList2;
@@ -792,6 +869,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JComboBox<String> UserList4;
     private javax.swing.JLabel Users;
     private javax.swing.JLabel horas24;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 
     @Override

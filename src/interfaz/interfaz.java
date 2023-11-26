@@ -43,6 +43,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     public LinkedList<User> listOfUsers = new LinkedList();
     public MinBinaryHeap heap = new MinBinaryHeap(25);
     public HashTable hashTable = new HashTable();
+    public LinkedList<Document> docListSended;
     
     /**
      * Creates new form interfaz
@@ -111,10 +112,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         DocList1 = new javax.swing.JComboBox<>();
         Buscar1 = new javax.swing.JLabel();
         TituloElimimar = new javax.swing.JLabel();
-        UserList3 = new javax.swing.JComboBox<>();
         TituloElimimar1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         BorrarDocCola = new javax.swing.JButton();
+        BuscarUser = new javax.swing.JTextField();
+        BuscarUserButton = new javax.swing.JButton();
         ManejarCola = new javax.swing.JPanel();
         UserList4 = new javax.swing.JComboBox<>();
         Buscar2 = new javax.swing.JLabel();
@@ -475,13 +477,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         TituloElimimar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloElimimar.setText("Eliminar Doc de la Cola");
 
-        UserList3.setToolTipText("");
-        UserList3.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                UserList3FocusGained(evt);
-            }
-        });
-
         TituloElimimar1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TituloElimimar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloElimimar1.setText("Imprimir");
@@ -492,6 +487,13 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         BorrarDocCola.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BorrarDocColaMouseClicked(evt);
+            }
+        });
+
+        BuscarUserButton.setText("Buscar Usuario");
+        BuscarUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BuscarUserButtonMouseClicked(evt);
             }
         });
 
@@ -511,24 +513,26 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                         .addGap(78, 78, 78)
                         .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
-                                .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(UserList3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TituloElimimar, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                                    .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(60, 60, 60))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                                 .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(121, 121, 121))))
+                                .addGap(121, 121, 121))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                                .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(TituloElimimar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BuscarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(60, 60, 60))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                                 .addComponent(BorrarDocCola, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(118, 118, 118))
+                                .addGap(115, 115, 115))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                                 .addComponent(Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(87, 87, 87))))))
-
+                                .addGap(86, 86, 86))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
+                                .addComponent(BuscarUserButton)
+                                .addGap(139, 139, 139))))))
         );
         ColaLayout.setVerticalGroup(
             ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,18 +548,20 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 .addGroup(ColaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ColaLayout.createSequentialGroup()
                         .addComponent(Buscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(UserList3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(Buscar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BuscarUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BuscarUserButton))
                     .addGroup(ColaLayout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(BotonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(Buscar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DocList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BorrarDocCola)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ColaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1))
@@ -643,9 +649,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(CargarArchivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(9, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Names, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -677,13 +683,15 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(21, 21, 21)
                             .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(CargarArchivo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(CargarArchivo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -797,7 +805,9 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
             if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())){
                 for (int i = 0; i <= NodoUser.getValue().getDocuments().getSize() -1; i++) {
-                    DocList.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+                    if (!NodoUser.getValue().getDocuments().get(i).isIsInPQ()) {
+                        DocList.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+                    }    
                 }
             }
         }
@@ -815,27 +825,21 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
     private void DocList1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DocList1FocusGained
         /**
-         * Accede a la lista de documentos asociados a un usuario existentes por el ComboBox    
+         * Accede a los documentos del usuario que estan en la cola de impresion
          */
         DocList1.removeAllItems();
-        for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
-            if (UserList.getSelectedItem().equals(NodoUser.getValue().getUsername())){
-                for (int i = 0; i <= NodoUser.getValue().getDocuments().getSize() -1; i++) {
-                    DocList1.addItem(NodoUser.getValue().getDocuments().get(i).getName());
+        
+        if (docListSended != null) {
+            for (Nodo<Document> NodoDocument = docListSended.getHead(); NodoDocument != null ; NodoDocument = NodoDocument.getNext()) {
+                if (NodoDocument.getValue().isIsInPQ() != false) {
+                    DocList1.addItem(NodoDocument.getValue().getName());
+                } else {
+                    docListSended.remove(NodoDocument.getValue());
                 }
             }
         }
+        DocList1.requestFocus();
     }//GEN-LAST:event_DocList1FocusGained
-
-    private void UserList3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList3FocusGained
-        /**
-         * Accede a la lista de usuarios existentes por el ComboBox 
-         */
-        UserList3.removeAllItems();
-        for (int i = 0; i <= listOfUsers.getSize()-1; i++) {
-            UserList3.addItem(listOfUsers.get(i).getUsername());
-        }
-    }//GEN-LAST:event_UserList3FocusGained
 
     private void UserList4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserList4FocusGained
         /**
@@ -866,26 +870,50 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
     private void BotonImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonImprimirMouseClicked
        /**
-        * 
+        * Obtiene el documento con menor valor de tiempo de la cola de prioridad
         */
-        
+       // Valores auxiliares
+        Document docPrinted = heap.extractMin();
+        DefaultTableModel model = (DefaultTableModel) TablaCola.getModel();
+        DateFormat obj = new SimpleDateFormat("HH:mm:ss"); 
+        // Si el documento no es null, entonces actualiza la vista de la cola e imprime el documento.
+        if (docPrinted != null) {
+            if (heap.getCurrentHeapSize() > 0) {
+                for (int i = 0; i <= heap.getCurrentHeapSize() - 1; i++) {
+                    Document docPQ = heap.getHeapArray()[i];
+                    model.setRowCount(0);
+                    model.addRow(new Object[] {docPQ.getName(), docPQ.getDocument_type(), obj.format(new Date(docPQ.getTimeSendToPriorityQueue())), docPQ.getSize()});
+                   }
+            } else {
+                model.setRowCount(0);
+            }
+        docPrinted.setIsInPQ(false);
+        DocList2.requestFocus();
+        JOptionPane.showMessageDialog(rootPane, "Se ha impreso el documento: " + docPrinted.getName() + " Formato: " + docPrinted.getDocument_type() + " Tamaño: " + docPrinted.getSize());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No hay documentos en la cola");
+        }
     }//GEN-LAST:event_BotonImprimirMouseClicked
 
     private void MandarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MandarMouseClicked
         // TODO add your handling code here:
+        
+        //Conseguir usuario y despues se accede a su lista de documentos no enviados a la cola
         for (Nodo<User> NodoUser = listOfUsers.getHead() ; NodoUser != null; NodoUser = NodoUser.getNext()){
             if (UserList4.getSelectedItem().equals(NodoUser.getValue().getUsername())){
                     User user = NodoUser.getValue();
                 for (Nodo<Document> NodoDocumento = user.getDocuments().getHead(); NodoDocumento != null ; NodoDocumento = NodoDocumento.getNext()) {
                     if (NodoDocumento.getValue().getName().equals(DocList2.getSelectedItem())) {
                         Document documento = NodoDocumento.getValue();
+                        // Revisar la prioridad del usuario y dependiendo de este, la etiqueta de tiempo se vera manipulada.
                         if (user.getType().equals("prioridad_alta")) {
-                            documento.setTimeSendToPriorityQueue(System.currentTimeMillis() - 300000);
+                            documento.setTimeSendToPriorityQueue(System.currentTimeMillis() - 480000);
                         } else if (user.getType().equals("prioridad_media")) {
-                            documento.setTimeSendToPriorityQueue(System.currentTimeMillis() - 180000);
+                            documento.setTimeSendToPriorityQueue(System.currentTimeMillis() - 240000);
                         } else {
                             documento.setTimeSendToPriorityQueue(System.currentTimeMillis());
                         }
+                        // Insertar a la tabla de dispersion y a la cola de prioridad
                         documento.setIsInPQ(true);
                         heap.insert(documento);
                         hashTable.put(UserList4.getSelectedItem().toString(), documento);
@@ -898,12 +926,17 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                         sorter.setSortKeys(Collections.singletonList(
                             new RowSorter.SortKey(2, SortOrder.ASCENDING)));
                         TablaCola.setRowSorter(sorter);
+                        model.setRowCount(0);
                         
-                        model.addRow(new Object[] {documento.getName(), documento.getDocument_type(), obj.format(new Date(documento.getTimeSendToPriorityQueue())), documento.getSize()});
+                        for (int i = 0; i <= heap.getCurrentHeapSize() - 1; i++) {
+                            Document docPQ = heap.getHeapArray()[i];
+                            model.addRow(new Object[] {docPQ.getName(), docPQ.getDocument_type(), obj.format(new Date(docPQ.getTimeSendToPriorityQueue())), docPQ.getSize()});
+                        }
                         sorter.sort();
                         sorter.setSortable(2, false);
 
                         JOptionPane.showMessageDialog(null, "Documento enviado a la cola de prioridad");
+                        DocList.requestFocus();
                         DocList2.requestFocus();
                         
                         break;
@@ -974,7 +1007,44 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
     private void BorrarDocColaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarDocColaMouseClicked
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) TablaCola.getModel();
+        DateFormat obj = new SimpleDateFormat("HH:mm:ss"); 
+        
+        // Itera en la lista obtenida de la hashTable y cuando consigue el elemento que haga match con el escogido en el selector, lo elimina
+        // de la lista de la hash Table y vuelve a rehacer la visualizacion del monticulo binario
+        for (Nodo<Document> NodoDocumento = docListSended.getHead(); NodoDocumento != null ; NodoDocumento = NodoDocumento.getNext()) {
+            if (NodoDocumento.getValue().getName().equals(DocList1.getSelectedItem())) {
+                NodoDocumento.getValue().setTimeSendToPriorityQueue(0);
+                Document docRemoved = heap.extractMin();
+                docRemoved.setIsInPQ(false);
+                docListSended.remove(docRemoved);
+                JOptionPane.showMessageDialog(rootPane, "Se ha eliminado el documento: " + docRemoved.getName() + " Formato: " + docRemoved.getDocument_type() + " Tamaño: " + docRemoved.getSize());
+                
+                if (heap.getCurrentHeapSize() > 0) {
+                for (int i = 0; i <= heap.getCurrentHeapSize() - 1; i++) {
+                    Document docPQ = heap.getHeapArray()[i];
+                    model.setRowCount(0);
+                    model.addRow(new Object[] {docPQ.getName(), docPQ.getDocument_type(), obj.format(new Date(docPQ.getTimeSendToPriorityQueue())), docPQ.getSize()});
+                   }
+                } else {
+                    model.setRowCount(0);
+                }
+                DocList1.requestFocus();
+                break;
+            }
+        }
     }//GEN-LAST:event_BorrarDocColaMouseClicked
+
+    private void BuscarUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarUserButtonMouseClicked
+        // TODO add your handling code here:
+        String user = BuscarUser.getText().trim();
+        DocList1.removeAllItems();
+        docListSended = hashTable.get(user);
+        
+        // Prepopula el selector de documentos para el usuario buscado accedido a traves de la hash table 
+
+        DocList1.requestFocus();
+    }//GEN-LAST:event_BuscarUserButtonMouseClicked
 
     public static void main(String[] args) {
         
@@ -994,6 +1064,8 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel Buscar1;
     private javax.swing.JLabel Buscar2;
     private javax.swing.JLabel Buscar3;
+    private javax.swing.JTextField BuscarUser;
+    private javax.swing.JButton BuscarUserButton;
     private javax.swing.JButton CargarArchivo;
     private javax.swing.JPanel Cola;
     private javax.swing.JLabel College;
@@ -1006,7 +1078,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel Ejemplo3;
     private javax.swing.JLabel Ejemplo4;
     private javax.swing.JLabel Ejemplo5;
-    private javax.swing.JButton EliminarCola;
     private javax.swing.JButton Mandar;
     private javax.swing.JPanel ManejarCola;
     private javax.swing.JLabel Names;
@@ -1031,7 +1102,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JComboBox<String> UserList;
     private javax.swing.JComboBox<String> UserList1;
     private javax.swing.JComboBox<String> UserList2;
-    private javax.swing.JComboBox<String> UserList3;
     private javax.swing.JComboBox<String> UserList4;
     private javax.swing.JLabel Users;
     private javax.swing.JLabel horas24;

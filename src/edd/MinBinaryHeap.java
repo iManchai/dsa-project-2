@@ -119,7 +119,7 @@ public class MinBinaryHeap {
      * Método para reorganizar el arreglo dependiendo de los valores de los índices
      * @param key valor de la raíz
      */
-    private void MinHeapify(int key) {
+    public void MinHeapify(int key) {
         int l = getLeftChildIndex(key);
         int r = getRightChildIndex(key);
  

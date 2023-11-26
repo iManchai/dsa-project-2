@@ -222,7 +222,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         TipoDoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TipoDoc.setText("Tipo de Documento");
 
-        TiposdeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Word", "Excel", "PowerPoint", "PDF", "Imagen" }));
+        TiposdeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Word", "PowerPoint", "PDF" }));
         TiposdeDoc.setToolTipText("");
 
         AñadirDoc.setText("Añadir");
@@ -686,12 +686,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(CargarArchivo)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(CargarArchivo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -888,6 +887,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             }
         docPrinted.setIsInPQ(false);
         DocList2.requestFocus();
+        DocList1.requestFocus();
         JOptionPane.showMessageDialog(rootPane, "Se ha impreso el documento: " + docPrinted.getName() + " Formato: " + docPrinted.getDocument_type() + " Tamaño: " + docPrinted.getSize());
         } else {
             JOptionPane.showMessageDialog(rootPane, "No hay documentos en la cola");
@@ -1012,22 +1012,30 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         // Itera en la lista obtenida de la hashTable y cuando consigue el elemento que haga match con el escogido en el selector, lo elimina
         // de la lista de la hash Table y vuelve a rehacer la visualizacion del monticulo binario
         for (Nodo<Document> NodoDocumento = docListSended.getHead(); NodoDocumento != null ; NodoDocumento = NodoDocumento.getNext()) {
-            if (NodoDocumento.getValue().getName().equals(DocList1.getSelectedItem())) {
+            if (DocList1.getSelectedItem().equals(NodoDocumento.getValue().getName())) {
                 NodoDocumento.getValue().setTimeSendToPriorityQueue(0);
+                heap.MinHeapify(0);
                 Document docRemoved = heap.extractMin();
                 docRemoved.setIsInPQ(false);
                 docListSended.remove(docRemoved);
                 JOptionPane.showMessageDialog(rootPane, "Se ha eliminado el documento: " + docRemoved.getName() + " Formato: " + docRemoved.getDocument_type() + " Tamaño: " + docRemoved.getSize());
                 
                 if (heap.getCurrentHeapSize() > 0) {
-                for (int i = 0; i <= heap.getCurrentHeapSize() - 1; i++) {
-                    Document docPQ = heap.getHeapArray()[i];
                     model.setRowCount(0);
-                    model.addRow(new Object[] {docPQ.getName(), docPQ.getDocument_type(), obj.format(new Date(docPQ.getTimeSendToPriorityQueue())), docPQ.getSize()});
-                   }
+                    for (int i = 0; i <= heap.getCurrentHeapSize(); i++) {
+                        Document docPQ = heap.getHeapArray()[i];
+                        if (docPQ != null ) {
+                            model.addRow(new Object[] {docPQ.getName(), 
+                            docPQ.getDocument_type(),
+                            obj.format(new Date(docPQ.getTimeSendToPriorityQueue())), 
+                            docPQ.getSize()
+                            });   
+                        }
+                    }
                 } else {
                     model.setRowCount(0);
                 }
+                
                 DocList1.requestFocus();
                 break;
             }

@@ -731,7 +731,6 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
             UserList.requestFocus();
             UserList1.requestFocus();
             UserList2.requestFocus();
-            UserList3.requestFocus();
             UserList4.requestFocus();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);

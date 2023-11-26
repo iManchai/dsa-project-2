@@ -10,6 +10,12 @@ import java.io.IOException;
 
 
 public class HashTable {
+    
+    /**
+     * Atributos del Hash Table
+     * @field listOfHashTable: Arreglo de listas enlazadas de documentos
+     * @field capacity: Capacidad del arreglo
+     */
     private LinkedList<Document>[] listOfHashTable;
     private int capacity = 20;
 
@@ -17,6 +23,11 @@ public class HashTable {
         listOfHashTable = new LinkedList[capacity];
     }
 
+    /**
+     * Metodo de añadir/modificar la HashTable
+     * @param key
+     * @param value 
+     */
     public void put(String key, Document value) {
         int index = getIndex(key);
         LinkedList<Document> docList = listOfHashTable[index];
@@ -29,6 +40,11 @@ public class HashTable {
         }
     }
 
+    /**
+     * Obtener la data a traves del usuario (key)
+     * @param key
+     * @return LinkedList 
+     */
     public LinkedList get(String key) {
         int index = getIndex(key);
         LinkedList list = listOfHashTable[index];
@@ -38,6 +54,11 @@ public class HashTable {
         return null;
     }
 
+    /**
+     * Funcion de Hash para acceder al indice del usuario deseado
+     * @param key
+     * @return int indice
+     */
     private int getIndex(String key) {
         return Math.abs(key.hashCode() % capacity);
     }

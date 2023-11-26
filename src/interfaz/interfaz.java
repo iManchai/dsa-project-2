@@ -4,6 +4,7 @@
  */
 package interfaz;
 
+import com.mxgraph.model.mxCell;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +25,10 @@ import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
+import com.mxgraph.view.mxGraph;
+import javax.swing.JFrame;
 
 /**
  *
@@ -44,6 +49,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     public MinBinaryHeap heap = new MinBinaryHeap(25);
     public HashTable hashTable = new HashTable();
     public LinkedList<Document> docListSended;
+    
     
     /**
      * Creates new form interfaz
@@ -106,6 +112,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaCola = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        VerCola = new javax.swing.JButton();
         Cola = new javax.swing.JPanel();
         BotonImprimir = new javax.swing.JButton();
         Buscar = new javax.swing.JLabel();
@@ -427,6 +434,13 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
 
         jLabel1.setText("Formato cola");
 
+        VerCola.setText("Ver cola");
+        VerCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerColaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TabVerLayout = new javax.swing.GroupLayout(TabVer);
         TabVer.setLayout(TabVerLayout);
         TabVerLayout.setHorizontalGroup(
@@ -438,17 +452,24 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                         .addComponent(jLabel1))
                     .addGroup(TabVerLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(317, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(VerCola, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         TabVerLayout.setVerticalGroup(
             TabVerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TabVerLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGroup(TabVerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabVerLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TabVerLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(VerCola, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         Tabs.addTab("Ver Cola", TabVer);
@@ -616,7 +637,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                             .addComponent(Mandar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(DocList2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(UserList4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, Short.MAX_VALUE))))
                 .addContainerGap(291, Short.MAX_VALUE))
         );
         ManejarColaLayout.setVerticalGroup(
@@ -686,12 +707,11 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(CargarArchivo)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(CargarArchivo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1045,6 +1065,78 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
         DocList1.requestFocus();
     }//GEN-LAST:event_BuscarUserButtonMouseClicked
 
+    private void VerColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerColaActionPerformed
+        // TODO add your handling code here:
+    mxGraph graph = new mxGraph();
+    Object parent = graph.getDefaultParent();
+
+    graph.getModel().beginUpdate();
+    try {
+        graph.removeCells(graph.getChildVertices(parent));  
+
+        int height = (int) (Math.log(heap.getCurrentHeapSize()) / Math.log(2)) + 1;
+        int nodesInLevel = 1;
+        int xSpacing = 70;
+        int ySpacing = 100;
+        int y = 20;
+        int nodoCount = 0;
+        Object[] verticeArray = new Object[heap.getCurrentHeapSize()];  
+        Object[] aristaArray = new Object[heap.getCurrentHeapSize()];  
+
+        for (int level = 0; level < height; level++) {
+            int nodosInLevel = Math.min(nodesInLevel, heap.getCurrentHeapSize() - nodoCount);
+            int x = 20 + (height - 1 - level) * xSpacing * nodesInLevel;
+
+            for (int i = nodosInLevel -1; i >= 0; i--) {
+                if (heap.getHeapArray()[nodoCount] != null) {
+                    String documentName = heap.getHeapArray()[nodoCount].getName();
+                    int minWidth = 40;  
+                    int minHeight = 40;  
+                    int textWidth = documentName.length() * 8;  
+                    int ellipseWidth = Math.max(minWidth, textWidth);  
+                    int ellipseHeight = minHeight;
+
+                    
+                    verticeArray[nodoCount] = graph.insertVertex(parent, null, documentName, x, y, ellipseWidth, ellipseHeight, mxConstants.SHAPE_ELLIPSE);
+
+                    if (nodoCount > 0) {
+                        int parentIndex = (nodoCount - 1) / 2;
+
+                        
+                        boolean edgeExists = false;
+                        for (int j = 0; j < nodoCount; j++) {
+                            if (aristaArray[j] != null && aristaArray[j] instanceof mxCell && ((mxCell) aristaArray[j]).getSource() == verticeArray[parentIndex] && ((mxCell) aristaArray[j]).getTarget() == verticeArray[nodoCount]) {
+                                edgeExists = true;
+                                break;
+                            }
+                        }
+
+                        if (!edgeExists) {
+                            Object edge = graph.insertEdge(parent, null, "", verticeArray[parentIndex], verticeArray[nodoCount]);
+                            aristaArray[nodoCount] = edge; 
+                        }
+                    }
+                }
+
+                x += xSpacing;
+                nodoCount++;
+            }
+
+            nodesInLevel *= 2;
+            y += ySpacing;
+        }
+    } finally {
+        graph.getModel().endUpdate();
+    }
+
+    JFrame frame = new JFrame("Cola representada como árbol binario");
+    mxGraphComponent graphComponent = new mxGraphComponent(graph);
+    frame.add(graphComponent);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    frame.setSize(800, 600);
+    frame.setVisible(true);
+    }//GEN-LAST:event_VerColaActionPerformed
+
     public static void main(String[] args) {
         
     
@@ -1103,6 +1195,7 @@ public class interfaz extends javax.swing.JFrame implements Runnable{
     private javax.swing.JComboBox<String> UserList2;
     private javax.swing.JComboBox<String> UserList4;
     private javax.swing.JLabel Users;
+    private javax.swing.JButton VerCola;
     private javax.swing.JLabel horas24;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

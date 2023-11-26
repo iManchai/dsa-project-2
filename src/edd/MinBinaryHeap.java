@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edd;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
+import com.mxgraph.view.mxGraph;
+import javax.swing.*;
 
 /**
  *
@@ -177,6 +181,39 @@ public class MinBinaryHeap {
     return mini;
   }
     
+    public class MinBinaryHeapVisualization extends JFrame {
+
+        public MinBinaryHeapVisualization(MinBinaryHeap heap) {
+            mxGraph graph = new mxGraph();
+            Object parent = graph.getDefaultParent();
+
+            graph.getModel().beginUpdate();
+            try {
+                Object[] vertices = new Object[heap.getCurrentHeapSize()];
+
+                // Add vertices for each node in the heap
+                for (int i = 0; i < heap.getCurrentHeapSize(); i++) {
+                    vertices[i] = graph.insertVertex(parent, null, heap.getHeapArray()[i].getTimeSendToPriorityQueue(), 50 + 100 * i, 50, 40, 40);
+                }
+
+                // Add edges to represent the parent-child relationships
+                for (int i = 0; i < heap.getCurrentHeapSize(); i++) {
+                    if (heap.hasLeftChild(i)) {
+                        graph.insertEdge(parent, null, null, vertices[i], vertices[heap.getLeftChildIndex(i)]);
+                    }
+                    if (heap.hasRightChild(i)) {
+                        graph.insertEdge(parent, null, null, vertices[i], vertices[heap.getRightChildIndex(i)]);
+                    }
+                }
+            } finally {
+                graph.getModel().endUpdate();
+            }
+
+            mxGraphComponent graphComponent = new mxGraphComponent(graph);
+            getContentPane().add(graphComponent);
+        }
+
     
     
+    }
 }

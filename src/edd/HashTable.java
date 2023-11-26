@@ -10,7 +10,7 @@ import java.io.IOException;
 
 
 public class HashTable {
-    private LinkedList<Entry>[] listOfHashTable;
+    private LinkedList<Document>[] listOfHashTable;
     private int capacity = 20;
 
     public HashTable() {
@@ -19,17 +19,17 @@ public class HashTable {
 
     public void put(String key, Document value) {
         int index = getIndex(key);
-        LinkedList<Entry> docList = listOfHashTable[index];
+        LinkedList<Document> docList = listOfHashTable[index];
         if (docList == null) {
             docList = new LinkedList();
-            docList.add(new Entry(key, value));
+            docList.add(value);
             listOfHashTable[index] = docList;
         } else {
-            docList.add(new Entry(key, value));
+            docList.add(value);
         }
     }
 
-    public Object get(String key) {
+    public LinkedList get(String key) {
         int index = getIndex(key);
         LinkedList list = listOfHashTable[index];
         if (list != null) {
@@ -40,16 +40,6 @@ public class HashTable {
 
     private int getIndex(String key) {
         return Math.abs(key.hashCode() % capacity);
-    }
-
-    private class Entry {
-        public String key;
-        public Document value;
-
-        public Entry(String key, Document value) {
-            this.key = key;
-            this.value = value;
-        }
     }
 }
 
